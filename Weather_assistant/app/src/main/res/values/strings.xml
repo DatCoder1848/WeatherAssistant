@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Weather_assistant</string>
+    <string name="btn_current_location">You are here !</string>
+</resources>
