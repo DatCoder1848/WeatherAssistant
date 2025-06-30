@@ -1,4 +1,4 @@
-package com.example.weatherassistant.View.Components
+package com.example.weatherassistant.views.components
 
 import android.content.Context
 import java.time.DayOfWeek
@@ -31,7 +31,7 @@ fun getWeekDate(date: LocalDate) = when(date.dayOfWeek){
 
 fun getDayDetail(date: LocalDate) = "ngày " + date.dayOfMonth + ", tháng " + date.monthValue +  ", năm " + date.year
 
-fun evaluateUVLevel(uvIndex: Double) = when{
+fun evaluateUVLevel(uvIndex: Int) = when{
     uvIndex < 3 -> " Thấp"
     uvIndex < 6 -> " Trung bình"
     uvIndex < 8 -> " Cao"

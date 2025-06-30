@@ -1,4 +1,4 @@
-package com.example.weatherassistant.View.Components
+package com.example.weatherassistant.views.components
 
 import android.content.Context
 import androidx.compose.foundation.BorderStroke

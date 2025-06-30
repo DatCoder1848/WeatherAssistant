@@ -1,4 +1,4 @@
-package com.example.weatherassistant.View.Components
+package com.example.weatherassistant.views.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,7 +25,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.weatherassistant.R
-import java.time.DayOfWeek
 import java.time.LocalDate
 
 @Composable

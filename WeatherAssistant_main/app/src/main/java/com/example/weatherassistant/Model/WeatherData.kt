@@ -10,10 +10,10 @@ data class WeatherData (
     val minTemp: Double,
     val dayOfWeek: String,
     val date: LocalDate,
-    val humidity: Int,
-    val pressure: Int,
+    val humidity: Double,
+    val pressure: Double,
     val windSpeed: Double,
     val sunrise: String,
     val sunset: String,
-    val uvIndex: Double
+    val uvIndex: Int
 )
