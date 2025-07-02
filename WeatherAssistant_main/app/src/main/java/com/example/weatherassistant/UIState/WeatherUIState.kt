@@ -1,10 +1,11 @@
 package com.example.weatherassistant.UIState
 
 import com.example.weatherassistant.Model.WeatherData
+import com.example.weatherassistant.data.model.WeatherApiResponse
 
 sealed class WeatherUIState {
     object Loading : WeatherUIState()
-    data class Success(val data: WeatherData) : WeatherUIState()
+    object Success : WeatherUIState()
     data class Error(val message: String) : WeatherUIState()
     object Empty : WeatherUIState()
 }

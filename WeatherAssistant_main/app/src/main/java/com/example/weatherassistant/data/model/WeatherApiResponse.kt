@@ -1,10 +1,10 @@
 package com.example.weatherassistant.data.model
 
-import com.squareup.moshi.JsonClass
 
 //@JsonClass(generateAdapter = true)
 data class WeatherApiResponse (
     val timezone: String,
+    val address: String,
     val days: List<WeatherDay>
 )
 

@@ -80,12 +80,12 @@ fun SearchBar(modifier: Modifier = Modifier, onSearching: (String) -> Unit){
 }
 
 @Composable
-fun LocationButton(modifier: Modifier = Modifier, location: String, onClick: () -> Unit) {
+fun LocationButton(modifier: Modifier = Modifier, location: String, locationName: String? = null, onClick: (String) -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 10.dp)
             // Click lambda function here
-            .clickable(onClick = onClick),
+            .clickable(onClick = { onClick(location) } ),
         horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -96,7 +96,7 @@ fun LocationButton(modifier: Modifier = Modifier, location: String, onClick: () 
             tint = Color.Red
         )
         Text(
-            text = if (location.isEmpty()) "No location set" else location,
+            text = if (location.isEmpty() && locationName.isNullOrEmpty()) "No location set" else locationName ?: location,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
             fontSize = 25.sp,

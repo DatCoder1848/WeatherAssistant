@@ -4,6 +4,7 @@ import java.time.LocalDate
 
 data class WeatherData (
     val locationName: String,
+    val location: String,
     val condition: String,
     val currentTemp: Double,
     val maxTemp: Double,

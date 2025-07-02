@@ -35,7 +35,7 @@ fun MainInfo(condition: String, date: LocalDate, temp: Double, maxTemp: Double, 
 
     Row(
         modifier = Modifier.fillMaxWidth()
-            .height(IntrinsicSize.Min)
+            .fillMaxHeight(0.4f)
             .padding(horizontal = 10.dp)
             .padding(top = 20.dp)
     ){

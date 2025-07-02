@@ -3,7 +3,7 @@ package com.example.weatherassistant.views.components
 import android.content.Context
 import java.time.DayOfWeek
 import java.time.LocalDate
-
+// //❌ ✅ 🔥 👉 🧠  🔁
 fun parseResIdFromTitle(context: Context, title: String, prefix: String? = null, suffix: String? = null, oldSeparatedChar: Char? = null, newSeparatedChar: Char? = null ): Int {
     val name = prefix + if (oldSeparatedChar != null && newSeparatedChar != null) title.replace(oldSeparatedChar,newSeparatedChar) else title + suffix
     return context.resources.getIdentifier(name, "drawable", context.packageName)

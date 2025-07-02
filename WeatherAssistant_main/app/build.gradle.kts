@@ -66,16 +66,14 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation)
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.squareup.moshi:moshi:1.14.0")   // dung de parse json
-    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Parse Json data
+    implementation("com.google.android.gms:play-services-location:21.0.1") // Location Services Library
 
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
