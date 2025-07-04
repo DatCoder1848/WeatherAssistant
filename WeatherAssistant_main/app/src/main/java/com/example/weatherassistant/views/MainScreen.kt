@@ -20,7 +20,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.weatherassistant.Model.WeatherData
 import com.example.weatherassistant.viewmodel.WeatherDataViewModel
 import com.example.weatherassistant.views.components.DateContainer
 import com.example.weatherassistant.views.components.DaySwitchingButton
