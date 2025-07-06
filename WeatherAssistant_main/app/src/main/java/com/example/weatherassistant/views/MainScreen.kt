@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +25,7 @@ import com.example.weatherassistant.viewmodel.WeatherDataViewModel
 import com.example.weatherassistant.views.components.DateContainer
 import com.example.weatherassistant.views.components.DaySwitchingButton
 import com.example.weatherassistant.views.components.DetailInfo
+import com.example.weatherassistant.views.components.ErrorData
 import com.example.weatherassistant.views.components.LocationButton
 import com.example.weatherassistant.views.components.MainInfo
 import com.example.weatherassistant.views.components.NotificationBanner
@@ -34,9 +36,14 @@ import java.time.LocalTime
 @Composable
 fun MainScreen(viewModel: WeatherDataViewModel = viewModel(), context: Context){
     var dayIndex by remember { mutableStateOf(viewModel.getTodayIndex() ?: 0) }
-    val daysData = viewModel.listDaysData
-    val dayData by remember { mutableStateOf(daysData[dayIndex]) }
-    val data = viewModel.getWeatherDataByHour(dayIndex, LocalTime.now().hour)
+    val wholeData by viewModel.wholeResponseData.collectAsState()
+    val data  by  remember (dayIndex, wholeData) {
+        derivedStateOf {
+            if (viewModel.listDaysData.isNotEmpty()){
+                viewModel.getWeatherDataByHour(dayIndex, LocalTime.now().hour)
+            } else ErrorData
+        }
+    }
     val notificationMessage = viewModel.notification.collectAsState()
     var mainBackground = remember(data.condition) {
         parseResIdFromTitle(
@@ -61,7 +68,6 @@ fun MainScreen(viewModel: WeatherDataViewModel = viewModel(), context: Context){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SearchBar() { location ->
-
                 viewModel.fetchWeatherFor(location)
             }
             LocationButton(location = data.location, locationName = data.locationName, onClick = {})
@@ -84,7 +90,8 @@ fun MainScreen(viewModel: WeatherDataViewModel = viewModel(), context: Context){
                 originDayIndex = viewModel.getTodayIndex() ?: 0,
                 dayIndex = dayIndex,
                 onPrevClick = { --dayIndex },
-                onNextClick = { ++dayIndex })
+                onNextClick = { ++dayIndex }
+            )
         }
         if (notificationMessage.value != null && notificationMessage.value != ""){
             NotificationBanner(message = notificationMessage.value)

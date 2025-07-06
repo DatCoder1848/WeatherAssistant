@@ -43,6 +43,8 @@ class WeatherDataViewModel(): ViewModel() {
     // Tạo biến lưu danh sách của data theo từng ngày để có thể linh hoạt lấy data theo từng ngày
     val listDaysData: List<WeatherDay>
         get() = _wholeResponseData.value?.days ?: emptyList()
+    val _currentWeatherData = MutableStateFlow<WeatherData?>(null)
+    val currentWeatherData: StateFlow<WeatherData?> = _currentWeatherData
 
     fun fetchWeatherFor(location: String){
         viewModelScope.launch {
@@ -59,15 +61,8 @@ class WeatherDataViewModel(): ViewModel() {
                 // Cập nhật dữ liệu từ response mới:
                 _wholeResponseData.value = response
                 Log.d("fetchData", "✅ Đã lấy được response !!!")
-                /*// Lay chi so ngay hien tai trong danh sach ngay:
-                val todayIndex = getTodayIndex() ?: 0 // Neu khong lay duoc chi so ngay hien tai trong danh sach thi mac dinh lay chi so dau tien
-                // Lay gio hien tai:
-                val currentHour = LocalTime.now().hour
-                // Lay du lieu thoi tiet hien tai
-                val data = getWeatherDataByHour(dateIndex = todayIndex, hour = currentHour)
-                Log.d("fetchData", "✅ Đã tạo dữ liệu đầy đủ !!!")*/
-
                 _uiState.value = WeatherUIState.Success
+
             }catch (e: Exception){
                 showNotification("❌ Địa điểm bạn nhập không hợp lệ ❌")
                 Log.d("fetchData", "❌ Lỗi không fetch được data: ${e.message}", e)
@@ -134,7 +129,7 @@ class WeatherDataViewModel(): ViewModel() {
         val dayData = listDaysData[dateIndex]
 
         return WeatherData(
-            locationName = _wholeResponseData.value?.timezone ?: "",
+            locationName = _wholeResponseData.value?.address ?: "",
             location = _wholeResponseData.value?.address ?: "",
             condition = dayData.icon,
             currentTemp = dayData.temp,
@@ -155,7 +150,7 @@ class WeatherDataViewModel(): ViewModel() {
         val hourData = dayData.hours[hour]
 
         return WeatherData(
-            locationName = _wholeResponseData.value?.timezone ?: "",
+            locationName = _wholeResponseData.value?.address ?: "",
             location = _wholeResponseData.value?.address ?: "",
             condition = hourData.icon,
             currentTemp = hourData.temp,
